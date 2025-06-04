@@ -1,0 +1,8 @@
+*.xlsx
+*.csv
+ecom-inventory.csv
+dummy.csv
+output_csv/
+__pycache__/
+*.pyc
+.env

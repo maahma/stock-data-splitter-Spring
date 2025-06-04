@@ -7,6 +7,8 @@ public class Main {
     public static void main(String[] args) {
         var context = new AnnotationConfigApplicationContext(ProjectConfig.class);
     
+        FileSplitService service = context.getBean(FileSplitService.class);
+        service.readCsv("ecom-inventory.csv");
         
     }
 }
