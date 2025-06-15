@@ -109,5 +109,14 @@ public class BranchRecord {
     
     @CsvBindByName(column = "Buyer Code")
     private String buyerCode;
+
+
+    public void setBranch(String branch){
+        this.branch = branch;
+    }
+    
+    public String getBranch(){
+        return branch;
+    }
 }
 

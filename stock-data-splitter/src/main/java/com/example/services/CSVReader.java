@@ -1,9 +1,7 @@
 package com.example.services;
 import java.io.*;
-import com.opencsv.*;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
-
 import java.util.*;
 import java.nio.file.*;
 import org.springframework.stereotype.*;
@@ -18,7 +16,7 @@ public class CSVReader {
 
         logger.info("Starting to read CSV from path: " + path.toString());
 
-        try (Reader reader = Files.newBufferedReader(path)) {
+        try (Reader reader = Files.newBufferedReader(path, java.nio.charset.StandardCharsets.ISO_8859_1)) {
 
             CsvToBean<BranchRecord> allRecords = new CsvToBeanBuilder<BranchRecord>(reader)
              .withType(BranchRecord.class)
@@ -34,25 +32,5 @@ public class CSVReader {
             e.printStackTrace();
             return Collections.emptyList(); 
         }
-
-
-
-        // List<List<String>> allRecords = new ArrayList<>();
-
-        // try{
-        //     FileReader fileReader = new FileReader(file);
-        //     CSVReader csvReader = new CSVReader(fileReader);
-        //     String[] nextRecord;
-
-        //     while ((nextRecord = csvReader.readNext()) != null){
-        //         List<String> row = Arrays.asList(nextRecord);
-        //         allRecords.add(row);
-        //     }
-
-        //     splitFile(allRecords);
-
-        // } catch (Exception e){
-        //     e.printStackTrace();
-        // }
     }
 }

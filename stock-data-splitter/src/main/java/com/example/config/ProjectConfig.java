@@ -3,8 +3,7 @@ import org.springframework.context.annotation.*;
 
 @Configuration
 @ComponentScan(basePackages={
-    "com.example.services",
-    "com.example.repositories"
+    "com.example.services"
 })
 public class ProjectConfig {
     
