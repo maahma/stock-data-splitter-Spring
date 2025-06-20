@@ -1,6 +1,7 @@
 package com.example.model;
 import com.opencsv.bean.CsvBindByName;
-
+import lombok.Data;
+@Data
 public class BranchRecord {
     @CsvBindByName(column = "Branch")
     private String branch;
@@ -109,14 +110,5 @@ public class BranchRecord {
     
     @CsvBindByName(column = "Buyer Code")
     private String buyerCode;
-
-
-    public void setBranch(String branch){
-        this.branch = branch;
-    }
-    
-    public String getBranch(){
-        return branch;
-    }
 }
 

@@ -6,35 +6,27 @@ import java.util.*;
 import java.nio.file.*;
 import org.springframework.stereotype.*;
 import com.example.model.BranchRecord;
-import java.util.logging.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import com.example.exception.*;
 
 @Service
 public class CSVReader {
-    private static final Logger logger = Logger.getLogger(CSVReader.class.getName());
 
-    public List<BranchRecord> readCsv(Path path){
+    private static final Logger logger = LogManager.getLogger(CSVReader.class);
 
-        logger.info("Starting to read CSV from path: " + path.toString());
+    public List<BranchRecord> readCsv(Reader reader) throws CsvReadException{
 
         // It reads a CSV file from the given path, parses it into Java objects of type BranchRecord, and returns a list of those objects.
-
-        try (Reader reader = Files.newBufferedReader(path, java.nio.charset.StandardCharsets.ISO_8859_1)) {
-
+        try {
+            logger.info("Reading CSV file and parsing it into objects of type BranchRecord");
             //  creates the CsvToBean parser object
-            CsvToBean<BranchRecord> allRecords = new CsvToBeanBuilder<BranchRecord>(reader)
+            return new CsvToBeanBuilder<BranchRecord>(reader)
              .withType(BranchRecord.class)
-             .build();
-
-
-            //  Parses the CsvToBean object 
-            List<BranchRecord> parsedRecords = allRecords.parse();
-            logger.info("Successfully parsed CSV. Total records: " + parsedRecords.size());
-
-            return parsedRecords;
-        
-        } catch (IOException e) {
-            e.printStackTrace();
-            return Collections.emptyList(); 
+             .build()
+             .parse();
+        } catch(Exception e) {
+            throw new CsvReadException("Failed to read CSV", e);
         }
     }
 }

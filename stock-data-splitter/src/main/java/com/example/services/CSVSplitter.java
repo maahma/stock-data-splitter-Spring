@@ -1,14 +1,16 @@
 package com.example.services;
 import org.springframework.stereotype.*;
 import java.util.*;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import com.example.model.BranchRecord;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @Service
 public class CSVSplitter{
-    private static final Logger logger = Logger.getLogger(CSVReader.class.getName());
 
+    private static final Logger logger = LogManager.getLogger(CSVSplitter.class);
+    
     // groups a list of BranchRecord objects by branch name
     public Map<String, List<BranchRecord>> splitCsv(List<BranchRecord> branchRecords){
 
